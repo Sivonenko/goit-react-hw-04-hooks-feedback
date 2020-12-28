@@ -3,23 +3,24 @@ import { useState } from 'react';
 import Section from './Section';
 import FeedbackOptions from './FeedbackOptions';
 import Statistics from './Statistics';
-import { feedback_options } from '../data/constans';
 
-function App() {
+export default function App() {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
-  const countTotalFeedback = () => good + neutral + bad;
-
+  const countTotalFeedback = () => {
+    const totalFeedback = good + neutral + bad;
+    return totalFeedback;
+  };
   const countPositiveFeedbackPercentage = () => {
     const total = this.countTotalFeedback();
     return total ? Math.round((good / total) * 100) : 0;
   };
 
-  const handleaveFeedback = ({ target }) => {
-    const feedback = target.dataset;
-    switch (feedback) {
+  const handleaveFeedback = event => {
+    const feedbackType = event.target.dataset;
+    switch (feedbackType) {
       case 'good':
         setGood(prevState => prevState + 1);
         break;
@@ -29,30 +30,16 @@ function App() {
       case 'bad':
         setBad(prevState => prevState + 1);
         break;
+      default:
+        break;
     }
   };
 
-  // handleaveFeedback = ({ target }) => {
-  //   const { feedback } = target.dataset;
-  //   this.setState(prevState => ({ [feedback]: prevState[feedback] + 1 }));
-  // };
-
-  // render() {
-  //   const { good, neutral, bad } = this.state;
-  //   const total = this.countTotalFeedback();
-  //   const positivePercentage = this.countPositiveFeedbackPercentage();
-  //   const styles = {
-  //     wrapper: {
-  //       background: '#b1b1b1',
-  //       width: '700px',
-  //       margin: '0 auto',
-  //     },
-  //   };
   return (
     <div>
       <Section title="Please leave feedback">
         <FeedbackOptions
-          options={feedback_options}
+          options={['good', 'neutral', 'bad']}
           onleaveFeedback={handleaveFeedback}
         />
       </Section>
@@ -68,5 +55,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

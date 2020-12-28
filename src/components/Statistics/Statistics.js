@@ -11,7 +11,7 @@ const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
           <div>Neutral:{neutral}</div>
           <div>Bad: {bad}</div>
           <div>Total: {total}</div>
-          <div>PositivePercentage: {positivePercentage}%</div>
+          <div>Positive percentage: {positivePercentage}%</div>
         </div>
       )}
       {total === 0 && <Notification message="No feedback given" />}
@@ -22,7 +22,7 @@ Statistics.propTypes = {
   good: PropTypes.number.isRequired,
   neutral: PropTypes.number.isRequired,
   bad: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
-  positivePercentage: PropTypes.number.isRequired,
+  // total: PropTypes.number.isRequired,
+  // positivePercentage: PropTypes.number.isRequired,
 };
 export default Statistics;
