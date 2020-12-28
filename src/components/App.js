@@ -4,7 +4,7 @@ import Section from './Section';
 import FeedbackOptions from './FeedbackOptions';
 import Statistics from './Statistics';
 
-import { FEEDBACK_OPTIONS } from '../data/constans';
+import { feedback_options } from '../data/constans';
 class App extends Component {
   state = {
     good: 0,
@@ -39,7 +39,7 @@ class App extends Component {
       <div style={styles.wrapper}>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            options={FEEDBACK_OPTIONS}
+            options={feedback_options}
             onleaveFeedback={this.handleaveFeedback}
           />
         </Section>
