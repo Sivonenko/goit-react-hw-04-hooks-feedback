@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import Section from './Section';
 import FeedbackOptions from './FeedbackOptions';
 import Statistics from './Statistics';
@@ -13,6 +12,7 @@ export default function App() {
     const totalFeedback = good + neutral + bad;
     return totalFeedback;
   };
+
   const countPositiveFeedbackPercentage = () => {
     const total = this.countTotalFeedback();
     return total ? Math.round((good / total) * 100) : 0;
@@ -34,7 +34,6 @@ export default function App() {
         break;
     }
   };
-
   return (
     <div>
       <Section title="Please leave feedback">
@@ -55,3 +54,5 @@ export default function App() {
     </div>
   );
 }
+
+// export default App
