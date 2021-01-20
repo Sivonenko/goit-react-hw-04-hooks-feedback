@@ -1,26 +1,20 @@
 import { useState } from 'react';
+import Container from './Container';
 import Section from './Section';
 import FeedbackOptions from './FeedbackOptions';
 import Statistics from './Statistics';
+import { fdbkOptions } from '../data/constans';
 
 function App() {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
-  const countTotalFeedback = () => {
-    const totalFeedback = good + neutral + bad;
-    return totalFeedback;
-  };
+  const countTotalFeedback = () => good + neutral + bad;
 
-  const countPositiveFeedbackPercentage = () => {
-    const total = this.countTotalFeedback();
-    return total ? Math.round((good / total) * 100) : 0;
-  };
-
-  const handleaveFeedback = event => {
-    const feedbackType = event.target.dataset;
-    switch (feedbackType) {
+  const handleaveFeedback = ({ target }) => {
+    const { feedback } = target.dataset;
+    switch (feedback) {
       case 'good':
         setGood(prevState => prevState + 1);
         break;
@@ -34,11 +28,17 @@ function App() {
         break;
     }
   };
+
+  const countPositiveFeedbackPercentage = () => {
+    const total = countTotalFeedback();
+    return total ? Math.round((good / total) * 100) : 0;
+  };
+
   return (
-    <div>
+    <Container>
       <Section title="Please leave feedback">
         <FeedbackOptions
-          options={['good', 'neutral', 'bad']}
+          options={fdbkOptions}
           onleaveFeedback={handleaveFeedback}
         />
       </Section>
@@ -46,12 +46,12 @@ function App() {
         <Statistics
           good={good}
           neutral={neutral}
-          total={countTotalFeedback}
+          total={countTotalFeedback()}
           bad={bad}
-          positivePercentage={countPositiveFeedbackPercentage}
+          positivePercentage={countPositiveFeedbackPercentage()}
         />
       </Section>
-    </div>
+    </Container>
   );
 }
 
